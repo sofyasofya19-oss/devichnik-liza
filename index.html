@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Девичник Лизы</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #1a0a2e;
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .slide {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .slide.active { display: flex; }
+
+        /* ===== ТИТУЛЬНЫЕ ===== */
+        .title-slide {
+            background: linear-gradient(
+                135deg, #1a0a2e 0%, #2d1b69 50%, #44318d 100%
+            );
+        }
+
+        .title-slide .block-number {
+            font-size: 1.2rem;
+            color: #c4a0e8;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 15px;
+        }
+
+        .title-slide h1 {
+            font-size: 4rem;
+            background: linear-gradient(90deg, #f8b4d9, #c4a0e8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .title-slide .description {
+            font-size: 1.4rem;
+            color: #a78bfa;
+            max-width: 650px;
+            line-height: 1.6;
+        }
+
+        /* ГЛАВНЫЙ ТИТУЛ */
+        .main-title-slide {
+            background: linear-gradient(
+                135deg, #2d1b69 0%, #44318d 40%, #6b21a8 100%
+            );
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-title-slide h1 {
+            font-size: 5rem;
+            background: linear-gradient(
+                90deg, #fbbf24, #f8b4d9, #c4a0e8
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 3;
+            text-shadow: none;
+        }
+
+        .main-title-slide .description {
+            font-size: 1.6rem;
+            color: #fff;
+            max-width: 650px;
+            line-height: 1.7;
+            position: relative;
+            z-index: 3;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        .cheers-animation {
+            font-size: 8rem;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .cheers-animation .glass-left {
+            display: inline-block;
+            animation: clink-left 2s ease-in-out infinite;
+        }
+
+        .cheers-animation .glass-right {
+            display: inline-block;
+            animation: clink-right 2s ease-in-out infinite;
+        }
+
+        @keyframes clink-left {
+            0%, 100% { transform: rotate(0deg) translateX(0); }
+            40% { transform: rotate(15deg) translateX(10px); }
+            50% { transform: rotate(15deg) translateX(10px); }
+            60% { transform: rotate(0deg) translateX(0); }
+        }
+
+        @keyframes clink-right {
+            0%, 100% { transform: rotate(0deg) translateX(0); }
+            40% { transform: rotate(-15deg) translateX(-10px); }
+            50% { transform: rotate(-15deg) translateX(-10px); }
+            60% { transform: rotate(0deg) translateX(0); }
+        }
+
+        .balloon {
+            position: absolute;
+            width: 40px;
+            height: 50px;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 6s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(5deg); }
+            50% { transform: translateY(-30px) rotate(-5deg); }
+        }
+
+        .photo-collage {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 3px;
+            opacity: 0.55;
+        }
+
+        .photo-collage img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 15%;
+            filter: brightness(1.2) saturate(1.1);
+        }
+
+        .title-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(
+                ellipse at center,
+                rgba(26, 10, 46, 0.7) 0%,
+                rgba(26, 10, 46, 0.35) 100%
+            );
+            z-index: 2;
+        }
+
+        /* ===== ВОПРОСЫ ===== */
+        .question-slide {
+            background: linear-gradient(
+                135deg, #0f0c29, #302b63, #24243e
+            );
+        }
+
+        .question-number {
+            font-size: 1.2rem;
+            color: #a78bfa;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 3.2rem;
+            color: #fff;
+            max-width: 850px;
+            line-height: 1.4;
+            font-style: italic;
+        }
+
+        .question-hint {
+            margin-top: 40px;
+            font-size: 1.2rem;
+            color: #7c6fa0;
+        }
+
+        /* ===== ВИДЕО ===== */
+        .video-slide {
+            background: linear-gradient(135deg, #1a0a2e, #2d1b69);
+        }
+
+        .video-container {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid #f8b4d9;
+            box-shadow: 0 0 40px rgba(248, 180, 217, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-label {
+            font-size: 1.5rem;
+            color: #c4a0e8;
+        }
+
+        /* ===== ЦИТАТЫ ===== */
+        .quote-slide {
+            background: linear-gradient(
+                135deg, #0f0c29, #1a1a4e, #24243e
+            );
+        }
+
+        .slide-subtitle {
+            font-size: 1.5rem;
+            color: #c4a0e8;
+            margin-bottom: 35px;
+        }
+
+        .quotes-container {
+            display: flex;
+            gap: 40px;
+            max-width: 1100px;
+            align-items: stretch;
+        }
+
+        .quote-card {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(248, 180, 217, 0.3);
+            border-radius: 20px;
+            padding: 45px 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .quote-card:hover {
+            border-color: #f8b4d9;
+            background: rgba(248, 180, 217, 0.1);
+            transform: scale(1.02);
+        }
+
+        .quote-card .label {
+            font-size: 1.1rem;
+            color: #a78bfa;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .quote-card .quote-text {
+            font-size: 1.7rem;
+            color: #fff;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        /* ===== РЕЗУЛЬТАТ ===== */
+        .result-slide {
+            background: linear-gradient(135deg, #0f0c29, #1a1a4e);
+        }
+
+        .result-emoji { font-size: 7rem; margin-bottom: 25px; }
+        .result-text { font-size: 2.8rem; margin-bottom: 20px; }
+
+        .result-explanation {
+            font-size: 1.5rem;
+            color: #c4a0e8;
+            max-width: 750px;
+            line-height: 1.6;
+        }
+
+        .author-name {
+            font-size: 2rem;
+            color: #f8b4d9;
+            font-weight: bold;
+        }
+
+        .sasha-name {
+            font-size: 2.2rem;
+            color: #fbbf24;
+            font-weight: bold;
+        }
+
+        /* ===== NEVER HAVE I EVER ===== */
+        .nhie-slide {
+            position: relative;
+            background-size: cover !important;
+            background-position: center !important;
+        }
+
+        .nhie-slide::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(26, 10, 46, 0.65);
+            z-index: 1;
+        }
+
+        .nhie-slide > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .nhie-text {
+            font-size: 3rem;
+            color: #fff;
+            max-width: 800px;
+            line-height: 1.4;
+        }
+
+        .nhie-emoji {
+            font-size: 5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .nhie-label {
+            font-size: 1.4rem;
+            color: #f8b4d9;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+        }
+
+        /* ===== HOT OR NOT ===== */
+        .hot-slide {
+            background: linear-gradient(
+                135deg, #2e0a1a, #691b45, #44318d
+            );
+        }
+
+        .hot-slide .photo-placeholder {
+            width: 350px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            border: 3px dashed rgba(248, 180, 217, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            color: #7c6fa0;
+            margin-bottom: 30px;
+        }
+
+        .hot-buttons {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .hot-btn {
+            font-size: 2rem;
+            padding: 15px 40px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .hot-btn.yes {
+            background: linear-gradient(135deg, #34d399, #10b981);
+            color: #fff;
+        }
+
+        .hot-btn.no {
+            background: linear-gradient(135deg, #f87171, #ef4444);
+            color: #fff;
+        }
+
+        /* ===== TINDER ===== */
+        .tinder-slide {
+            background: linear-gradient(
+                135deg, #1a0a2e, #6b21a8, #44318d
+            );
+        }
+
+        .tinder-profile {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            max-width: 900px;
+        }
+
+        .tinder-photo {
+            width: 300px;
+            height: 380px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 4px solid #f8b4d9;
+            box-shadow: 0 0 30px rgba(248, 180, 217, 0.3);
+            flex-shrink: 0;
+        }
+
+        .tinder-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .tinder-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(248, 180, 217, 0.3);
+            border-radius: 25px;
+            padding: 35px;
+            text-align: left;
+        }
+
+        .tinder-card .tinder-name {
+            font-size: 2.5rem;
+            color: #f8b4d9;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .tinder-card .tinder-field {
+            font-size: 1.3rem;
+            color: #e9d5ff;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .tinder-card .tinder-field strong {
+            color: #a78bfa;
+        }
+
+        /* ===== НАВИГАЦИЯ ===== */
+        .nav-hint {
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.3);
+            z-index: 999;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #f8b4d9, #a78bfa);
+            transition: width 0.3s ease;
+            z-index: 999;
+        }
+
+        /* ===== АНИМАЦИИ ===== */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes confetti {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(720deg); }
+        }
+
+        .slide.active > * {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .confetti-piece {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            top: -10px;
+            animation: confetti 3s linear forwards;
+            z-index: 998;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- ============ ТИТУЛЬНЫЙ СЛАЙД ============ -->
+    <div class="slide main-title-slide active">
+        <div class="photo-collage">
+            <img src="photos/girls_boat.png">
+            <img src="photos/girls_champagne_crop.png">
+            <img src="photos/cropped_3.png">
+            <img src="photos/cropped_4.png">
+            <img src="photos/cropped_5.png">
+            <img src="photos/cropped_6.png">
+        </div>
+        <div class="title-overlay"></div>
+
+        <div class="balloon" style="top:8%;left:3%;
+            background:#f8b4d9;width:55px;height:65px;
+            animation-delay:0s;"></div>
+        <div class="balloon" style="top:15%;right:6%;
+            background:#a78bfa;width:50px;height:60px;
+            animation-delay:1s;"></div>
+        <div class="balloon" style="top:55%;left:8%;
+            background:#fbbf24;width:60px;height:70px;
+            animation-delay:2s;"></div>
+        <div class="balloon" style="top:65%;right:10%;
+            background:#f8b4d9;width:45px;height:55px;
+            animation-delay:0.5s;"></div>
+        <div class="balloon" style="top:35%;left:88%;
+            background:#34d399;width:52px;height:62px;
+            animation-delay:1.5s;"></div>
+        <div class="balloon" style="top:82%;left:45%;
+            background:#c4a0e8;width:48px;height:58px;
+            animation-delay:3s;"></div>
+        <div class="balloon" style="top:12%;left:35%;
+            background:#fb7185;width:42px;height:52px;
+            animation-delay:2.5s;"></div>
+        <div class="balloon" style="top:45%;right:20%;
+            background:#fbbf24;width:50px;height:60px;
+            animation-delay:1.8s;"></div>
+
+        <div class="cheers-animation">
+            <span class="glass-left">🥂</span>
+        </div>
+        <h1>Девичник Лизы</h1>
+        <div class="description">
+            Она выходит замуж — и мы счастливы,
+            что собрались по этому поводу.<br><br>
+            Поехали!
+        </div>
+    </div>
+
+    <!-- ============ РАУНД 1: СОВМЕСТИМОСТЬ ============ -->
+    <div class="slide title-slide">
+        <div class="block-number">Раунд 1</div>
+        <h1>Совместимость с Сашей</h1>
+        <div class="description">
+            Лиза отвечает на вопрос. Потом смотрим,
+            что сказал Саша.<br>
+            Совпало — мэтч! Не совпало — шот 🥃
+        </div>
+    </div>
+
+    <!-- В1–В13 -->
+    <div class="slide question-slide">
+        <div class="question-number">Вопрос 1 из 13</div>
+        <div class="question-text">Кто из вас первый написал после первого свидания?</div>
+        <div class="question-hint">Лиза, отвечай вслух!</div>
+    </div>
+    <div class="slide video-slide">
+        <div class="video-container"><video src="video/саша1.mp4" controls></video></div>
+        <div class="video-label">Ответ Саши 💬</div>
+    </div>
+
+    <div class="slide question-slide">
+        <div class="question-number">Вопрос 2 из 13</div>
+        <div class="question-text">Какое самое странное блюдо Лиза готовила?</div>
+        <div class="question-hint">Лиза, отвечай вслух!</div>
+    </div>
+    <div class="slide video-slide">
+        <div class="video-container"><video src="video/саша2.mp4" controls></video></div>
+        <div class="video-label">Ответ Саши 💬</div>
+    </div>
+
+    <div class="slide question-slide">
+        <div class="question-number">Вопрос 3 из 13</div>
+        <div class="question-text">Из-за чего была ваша самая тупая ссора?</div>
+        <div class="question-hint">Лиза, отвечай вслух!</div>
+    </div>
+    <div class="slide video-slide">
+        <div class="video-container"><video src="video/саша3.mp4" controls></video></div>
+        <div class="video-label">Ответ Саши 💬</div>
+    </div>
+
+    <div class="slide question-slide">
+        <div class="question-number">Вопрос 4 из 13</div>
+        <div class="question-text">Какую привычку Лизы ты сначала терпел, а потом полюбил?</div>
+        <div class="question-hint">Лиза, отвечай вслух!</div>
+    </div>
+    <div class="slide video-slide">
+        <div class="video-container"><video src="video/саша4.mp4" controls></video></div>
+        <div class="video-label">Ответ Саши 💬</div>
+    </div>
+
+    <div class="slide question-slide">
+        <div class="question-number">Вопрос 5 из 13</div>
+        <div class="question-text">Что Лиза делает, когда думает, что ты не видишь?</div>
+        <div class="question-hint">Лиза, отвечай вслух!</div>
+    </div>
+    <div class="slide video-slide">
+        <div class="video-container"><video src="video/саша5.mp4" controls></video></div>
+        <div class="video-label">Ответ Саши 💬</div>
+    </div>
+
+    <div class="slide question-slide">
+        <div class="question-number">Вопрос 6 из 13</div>
+        <div class="question-text">Кто из вас храпит?</div>
+        <div class="question-hint">Лиза, отвечай вслух!</div>
+    </div>
+    <div class="slide video-slide">
+        <div class="video-container"><video src="video/саша6.mp4" controls></video></div>
+        <div class="video-label">Ответ Саши 💬</div>
+    </div>
+
+    <div class="slide question-slide">
+        <div class="question-number">Вопрос 7 из 13</div>
+        <div class="question-text">Какой фильм Лиза пересматривала больше всего?</div>
+        <div class="question-hint">Лиза, отвечай вслух!</div>
+    </div>
+    <div class="slide video-slide">
+        <div class="video-container"><video src="video/саша7.mp4" controls></video></div>
+        <div class="video-label">Ответ Саши 💬</div>
+    </div>
+
+    <div class="slide question-slide">
+        <div class="question-number">Вопрос 8 из 13</div>
+        <div class="question-text">Что Черри любит больше — тебя или Лизу?</div>
+        <div class="question-hint">Лиза, отвечай вслух!</div>
+    </div>
+    <div class="slide video-slide">
+        <div class="video-container"><video src="video/саша8.mp4" controls></video></div>
+        <div class="video-label">Ответ Саши 💬</div>
+    </div>
+
+    <div class="slide question-slide">
+        <div class="question-number">Вопрос 9 из 13</div>
+        <div class="question-text">Какой Лизин «контрол-фрик» момент тебя больше всего веселит?</div>
+        <div class="question-hint">Лиза, отвечай вслух!</div>
+    </div>
+    <div class="slide video-slide">
+        <div class="video-container"><video src="video/саша9.mp4" controls></video></div>
+        <div class="video-label">Ответ Саши 💬</div>
+    </div>
+
+    <div class="slide question-slide">
+        <div class="question-number">Вопрос 10 из 13</div>
+        <div class="question-text">Какой подарок от Лизы был самым неожиданным?</div>
+        <div class="question-hint">Лиза, отвечай вслух!</div>
+    </div>
+    <div class="slide video-slide">
+        <div class="video-container"><video src="video/саша10.mp4" controls></video></div>
+        <div class="video-label">Ответ Саши 💬</div>
+    </div>
+
+    <div class="slide question-slide">
+        <div class="question-number">Вопрос 11 из 13</div>
+        <div class="question-text">Если бы Лиза не стала продюсером — кем бы она была?</div>
+        <div class="question-hint">Лиза, отвечай вслух!</div>
+    </div>
+    <div class="slide video-slide">
+        <div class="video-container"><video src="video/саша11.mp4" controls></video></div>
+        <div class="video-label">Ответ Саши 💬</div>
+    </div>
+
+    <div class="slide question-slide">
+        <div class="question-number">Вопрос 12 из 13</div>
+        <div class="question-text">Самый неловкий момент на свидании?</div>
+        <div class="question-hint">Лиза, отвечай вслух!</div>
+    </div>
+    <div class="slide video-slide">
+        <div class="video-container"><video src="video/саша12.mp4" controls></video></div>
+        <div class="video-label">Ответ Саши 💬</div>
+    </div>
+
+    <div class="slide question-slide">
+        <div class="question-number">Вопрос 13 из 13</div>
+        <div class="question-text">Что бы ты сказал Лизе-из-прошлого, которая ещё тебя не знает?</div>
+        <div class="question-hint">Лиза, отвечай вслух!</div>
+    </div>
+    <div class="slide video-slide">
+        <div class="video-container"><video src="video/саша13.mp4" controls></video></div>
+        <div class="video-label">Ответ Саши 💬</div>
+    </div>
+
+    <!-- ============ РАУНД 2: ЛИЗА ВЫБИРАЕТ МУЖА ============ -->
+    <div class="slide title-slide">
+        <div class="block-number">Раунд 2</div>
+        <h1>Лиза выбирает мужа</h1>
+        <div class="description">
+            Мы нашли в интернете Tinder-профили самых
+            красивых мужчин в стране.<br>
+            Надеемся, они заслужили свайп вправо 👉
+        </div>
+    </div>
+
+    <div class="slide tinder-slide">
+        <div class="tinder-profile">
+            <div class="tinder-photo">
+                <img src="photos/rodrigo.png" alt="Родриго">
+            </div>
+            <div class="tinder-card">
+                <div class="tinder-name">Кандидат №1 — Родриго, 28</div>
+                <div class="tinder-field"><strong>Город:</strong> Мадрид</div>
+                <div class="tinder-field"><strong>Работа:</strong> Таинственный предприниматель</div>
+                <div class="tinder-field"><strong>О себе:</strong> "Люблю текилу, маленьких собак и женщин, которые всё контролируют"</div>
+                <div class="tinder-field"><strong>Плюс:</strong> Сам готовит и убирает</div>
+                <div class="tinder-field"><strong>Минус:</strong> Засыпает в 22:00</div>
+                <div class="tinder-field"><strong>Ищу:</strong> Ту, которая составит мне расписание на жизнь</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide tinder-slide">
+        <div class="tinder-profile">
+            <div class="tinder-photo">
+                <img src="photos/ahmed.png" alt="Ахмед">
+            </div>
+            <div class="tinder-card">
+                <div class="tinder-name">Кандидат №2 — Ахмед, 31</div>
+                <div class="tinder-field"><strong>Город:</strong> Нальчик → Москва</div>
+                <div class="tinder-field"><strong>Работа:</strong> "Бизнес, сестра, не спрашивай"</div>
+                <div class="tinder-field"><strong>О себе:</strong> "Увезу в горы. Там тихо, красиво, и никто не найдёт. Шучу. Или нет."</div>
+                <div class="tinder-field"><strong>Плюс:</strong> Решает любой вопрос за 10 минут</div>
+                <div class="tinder-field"><strong>Минус:</strong> Мама всегда на первом месте</div>
+                <div class="tinder-field"><strong>Ищу:</strong> Ту, за которую не стыдно перед родом</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide tinder-slide">
+        <div class="tinder-profile">
+            <div class="tinder-photo">
+                <img src="photos/alejandro.png" alt="Алехандро">
+            </div>
+            <div class="tinder-card">
+                <div class="tinder-name">Кандидат №3 — Алехандро, 27</div>
+                <div class="tinder-field"><strong>Город:</strong> Барселона</div>
+                <div class="tinder-field"><strong>Работа:</strong> "Художник... ну, пишу, рисую, живу"</div>
+                <div class="tinder-field"><strong>О себе:</strong> "Я покажу тебе такой закат, что ты забудешь как тебя зовут. Потом я тоже забуду как тебя зовут, но это не важно."</div>
+                <div class="tinder-field"><strong>Плюс:</strong> Говорит так, что хочется верить</div>
+                <div class="tinder-field"><strong>Минус:</strong> Исчезает на 3 недели после идеального свидания</div>
+                <div class="tinder-field"><strong>Ищу:</strong> Музу. На одну ночь. Максимум три.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide tinder-slide">
+        <div class="tinder-profile">
+            <div class="tinder-photo">
+                <img src="photos/dmitriy.png" alt="Дмитрий">
+            </div>
+            <div class="tinder-card">
+                <div class="tinder-name">Кандидат №4 — Дмитрий, 30</div>
+                <div class="tinder-field"><strong>Город:</strong> Москва</div>
+                <div class="tinder-field"><strong>Работа:</strong> IT, но «с душой»</div>
+                <div class="tinder-field"><strong>О себе:</strong> "Могу починить вайфай, собрать шкаф из IKEA и молча выслушать 40-минутный монолог о подругах"</div>
+                <div class="tinder-field"><strong>Плюс:</strong> Стабильный, надёжный, не исчезает</div>
+                <div class="tinder-field"><strong>Минус:</strong> В постели тоже стабильный и надёжный (без сюрпризов)</div>
+                <div class="tinder-field"><strong>Ищу:</strong> Ту, которая не будет спрашивать "о чём ты думаешь"</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ РАУНД 3: HOT OR NOT ============ -->
+    <div class="slide title-slide">
+        <div class="block-number">Раунд 3</div>
+        <h1>Hot or Not</h1>
+        <div class="description">
+            20 фото мужчин. 10 секунд на решение.<br>
+            Кричим ДА или НЕТ. Кто в меньшинстве — пьёт!
+        </div>
+    </div>
+
+    <div class="slide hot-slide">
+        <div class="photo-placeholder">Фото мужчин будут добавлены</div>
+        <div class="hot-buttons">
+            <div class="hot-btn no">НЕТ 👎</div>
+            <div class="hot-btn yes">ДА 🔥</div>
+        </div>
+    </div>
+
+    <!-- ============ РАУНД 4: ВИКТОРИНА ЦИТАТ ============ -->
+    <div class="slide title-slide">
+        <div class="block-number">Раунд 4</div>
+        <h1>Саша или Писатель?</h1>
+        <div class="description">
+            Две цитаты. Одна от Саши, другая от
+            латиноамериканского писателя.<br>
+            Лиза угадывает. Ошиблась — шот 🥃
+        </div>
+    </div>
+
+    <!-- Пара 1 -->
+    <div class="slide quote-slide">
+        <div class="slide-subtitle">Пара 1 — Какая цитата Сашина?</div>
+        <div class="quotes-container">
+            <div class="quote-card">
+                <div class="label">Цитата А</div>
+                <div class="quote-text">«Любовь — это не то, что находишь. Это то, что строишь каждый день заново.»</div>
+            </div>
+            <div class="quote-card">
+                <div class="label">Цитата Б</div>
+                <div class="quote-text">«Нууууу, любовь — это, понимаете... типо мехового треугольника. Вот вечером лежим вместе и лежим спокойненько.»</div>
+            </div>
+        </div>
+    </div>
+    <div class="slide result-slide">
+        <div class="result-emoji">🎉</div>
+        <div class="result-text">Ответ:</div>
+        <div class="result-explanation">
+            Цитата Б — это <span class="sasha-name">Саша!</span><br><br>
+            А цитата А — <span class="author-name">Габриэль Гарсиа Маркес</span>
+        </div>
+    </div>
+
+    <!-- Пара 2 -->
+    <div class="slide quote-slide">
+        <div class="slide-subtitle">Пара 2 — Какая цитата Сашина?</div>
+        <div class="quotes-container">
+            <div class="quote-card">
+                <div class="label">Цитата А</div>
+                <div class="quote-text">«Кто-то вот любит окрошку с квасом, а кто-то с кефиром, ну или с айраном. Чисто гипотетически, абстрактно выражаясь. Но вы вместе всё равно, в одну сторону смотрите!»</div>
+            </div>
+            <div class="quote-card">
+                <div class="label">Цитата Б</div>
+                <div class="quote-text">«Любовь так коротка, а забвение так длинно.»</div>
+            </div>
+        </div>
+    </div>
+    <div class="slide result-slide">
+        <div class="result-emoji">🎉</div>
+        <div class="result-text">Ответ:</div>
+        <div class="result-explanation">
+            Цитата А — это <span class="sasha-name">Саша!</span> Да, с окрошкой.<br><br>
+            А цитата Б — <span class="author-name">Пабло Неруда</span>
+        </div>
+    </div>
+
+    <!-- Пара 3 -->
+    <div class="slide quote-slide">
+        <div class="slide-subtitle">Пара 3 — Какая цитата Сашина?</div>
+        <div class="quotes-container">
+            <div class="quote-card">
+                <div class="label">Цитата А</div>
+                <div class="quote-text">«Люблю тебя не за то, кто ты, а за то, кем я становлюсь рядом с тобой.»</div>
+            </div>
+            <div class="quote-card">
+                <div class="label">Цитата Б</div>
+                <div class="quote-text">«Люблю тебя потому что самая лучшая женщина во вселенной!»</div>
+            </div>
+        </div>
+    </div>
+    <div class="slide result-slide">
+        <div class="result-emoji">🎉</div>
+        <div class="result-text">Ответ:</div>
+        <div class="result-explanation">
+            Цитата Б — это <span class="sasha-name">Саша!</span> Коротко и по делу.<br><br>
+            А цитата А — <span class="author-name">Габриэль Гарсиа Маркес</span>
+        </div>
+    </div>
+
+    <!-- Пара 4 -->
+    <div class="slide quote-slide">
+        <div class="slide-subtitle">Пара 4 — Какая цитата Сашина?</div>
+        <div class="quotes-container">
+            <div class="quote-card">
+                <div class="label">Цитата А</div>
+                <div class="quote-text">«Я пью потому что ты пьёшь. Это любовь же и есть.»</div>
+            </div>
+            <div class="quote-card">
+                <div class="label">Цитата Б</div>
+                <div class="quote-text">«Я пью, чтобы окружающие становились интереснее.»</div>
+            </div>
+        </div>
+    </div>
+    <div class="slide result-slide">
+        <div class="result-emoji">🎉</div>
+        <div class="result-text">Ответ:</div>
+        <div class="result-explanation">
+            Цитата А — это <span class="sasha-name">Саша!</span> Романтик и алкоголик в одном флаконе.<br><br>
+            А цитата Б — <span class="author-name">Эрнест Хемингуэй</span>
+        </div>
+    </div>
+
+    <!-- ============ РАУНД 5: NEVER HAVE I EVER ============ -->
+    <div class="slide title-slide">
+        <div class="block-number">Раунд 5</div>
+        <h1>Never Have I Ever</h1>
+        <div class="description">Кто делал — пьёт! 🍹</div>
+    </div>
+
+    <div class="slide nhie-slide" style="background:url('stock/couple1.png') center/cover;">
+        <div class="nhie-label">Never have I ever...</div>
+        <div class="nhie-text">...напивалась и писала бывшему</div>
+    </div>
+
+    <div class="slide nhie-slide" style="background:url('stock/s1.png') center/cover;">
+        <div class="nhie-label">Never have I ever...</div>
+        <div class="nhie-text">...просыпалась в чужой квартире и не помнила как туда попала</div>
+    </div>
+
+    <div class="slide nhie-slide" style="background:url('stock/s2.png') center/cover;">
+        <div class="nhie-label">Never have I ever...</div>
+        <div class="nhie-text">...пьяная признавалась кому-то в любви</div>
+    </div>
+
+    <div class="slide nhie-slide" style="background:url('stock/s3.png') center/cover;">
+        <div class="nhie-label">Never have I ever...</div>
+        <div class="nhie-text">...флиртовала ради бесплатного коктейля (и получала его)</div>
+    </div>
+
+    <div class="slide nhie-slide" style="background:url('stock/s4.png') center/cover;">
+        <div class="nhie-label">Never have I ever...</div>
+        <div class="nhie-text">...целовалась с кем-то просто потому что было скучно</div>
+    </div>
+
+    <div class="slide nhie-slide" style="background:url('stock/s5.png') center/cover;">
+        <div class="nhie-label">Never have I ever...</div>
+        <div class="nhie-text">...занималась сексом в общественном месте</div>
+    </div>
+
+    <div class="slide nhie-slide" style="background:url('stock/s6.png') center/cover;">
+        <div class="nhie-label">Never have I ever...</div>
+        <div class="nhie-text">...отправляла ню не тому человеку</div>
+    </div>
+
+    <div class="slide nhie-slide" style="background:url('stock/s7.png') center/cover;">
+        <div class="nhie-label">Never have I ever...</div>
+        <div class="nhie-text">...сталкерила человека настолько глубоко, что случайно лайкнула фото трёхлетней давности</div>
+    </div>
+
+    <div class="slide nhie-slide" style="background:url('stock/s8.png') center/cover;">
+        <div class="nhie-label">Never have I ever...</div>
+        <div class="nhie-text">...придумывала дебильную отмазку, чтобы уйти с плохого свидания</div>
+    </div>
+
+    <div class="slide nhie-slide" style="background:url('stock/s9.png') center/cover;">
+        <div class="nhie-label">Never have I ever...</div>
+        <div class="nhie-text">...блевала в такси и делала вид что всё нормально</div>
+    </div>
+
+    <div class="slide nhie-slide" style="background:url('stock/s10.png') center/cover;">
+        <div class="nhie-label">Never have I ever...</div>
+        <div class="nhie-text">...уходила из бара с незнакомцем, а подругам писала «я дома»</div>
+    </div>
+
+    <div class="slide nhie-slide" style="background:url('stock/s11.png') center/cover;">
+        <div class="nhie-label">Never have I ever...</div>
+        <div class="nhie-text">...плакала пьяная в туалете клуба, а через 10 минут танцевала как ни в чём не бывало</div>
+    </div>
+
+    <div class="slide nhie-slide" style="background:url('stock/couple3.png') center/cover;">
+        <div class="nhie-label">Never have I ever...</div>
+        <div class="nhie-text">...секстилась с человеком, с которым даже не встречалась вживую</div>
+    </div>
+
+    <!-- ============ ФИНАЛ ============ -->
+    <div class="slide main-title-slide">
+        <div class="photo-collage" id="finalCollage">
+            <img src="photos/liza_sasha_1.png">
+            <img src="photos/liza_sasha_2.png">
+            <img src="photos/liza_sasha_3_crop.png">
+            <img src="photos/liza_sasha_4_crop.png">
+            <img src="photos/liza_sasha_5.png">
+            <img src="photos/liza_sasha_6.png">
+        </div>
+        <div class="title-overlay"></div>
+
+        <div class="balloon" style="top:8%;left:5%;background:#f8b4d9;width:55px;height:65px;animation-delay:0s;"></div>
+        <div class="balloon" style="top:18%;right:7%;background:#a78bfa;width:50px;height:60px;animation-delay:1s;"></div>
+        <div class="balloon" style="top:55%;left:8%;background:#fbbf24;width:60px;height:70px;animation-delay:2s;"></div>
+        <div class="balloon" style="top:70%;right:12%;background:#f8b4d9;width:45px;height:55px;animation-delay:0.5s;"></div>
+        <div class="balloon" style="top:40%;left:90%;background:#34d399;width:48px;height:58px;animation-delay:1.5s;"></div>
+
+        <div class="cheers-animation">
+            <span class="glass-left">🥂</span>
+        </div>
+        <h1>За Лизу и Сашу!</h1>
+        <div class="description">
+            За любовь, за окрошку
+            и за меховые треугольники! 🤍
+        </div>
+    </div>
+
+    <div class="nav-hint">← → для навигации</div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progressBar');
+
+        function showSlide(index) {
+            slides.forEach(s => s.classList.remove('active'));
+            slides[index].classList.add('active');
+            currentSlide = index;
+            progressBar.style.width =
+                ((index + 1) / slides.length) * 100 + '%';
+            document.querySelectorAll('video')
+                .forEach(v => v.pause());
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1)
+                showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0)
+                showSlide(currentSlide - 1);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault(); nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault(); prevSlide();
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('video')) return;
+            if (e.clientX > window.innerWidth / 2) nextSlide();
+            else prevSlide();
+        });
+
+        if (window.location.hash) {
+            const n = parseInt(window.location.hash.slice(1));
+            if (!isNaN(n) && n >= 0 && n < slides.length)
+                showSlide(n);
+        }
+
+        function createConfetti() {
+            const colors = [
+                '#f8b4d9','#a78bfa','#fbbf24',
+                '#34d399','#f87171','#60a5fa'
+            ];
+            for (let i = 0; i < 60; i++) {
+                const p = document.createElement('div');
+                p.className = 'confetti-piece';
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.backgroundColor =
+                    colors[Math.floor(Math.random()*colors.length)];
+                p.style.animationDelay = Math.random()*2 + 's';
+                p.style.borderRadius =
+                    Math.random() > 0.5 ? '50%' : '0';
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 5000);
+            }
+        }
+
+        const obs = new MutationObserver(() => {
+            const a = document.querySelector('.slide.active');
+            if (a && a.classList.contains('result-slide'))
+                createConfetti();
+        });
+        slides.forEach(s => obs.observe(s, {
+            attributes: true, attributeFilter: ['class']
+        }));
+
+        showSlide(0);
+    </script>
+</body>
+</html>
