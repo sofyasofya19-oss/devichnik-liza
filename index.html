@@ -153,7 +153,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center 15%;
+            object-position: center center;
             filter: brightness(1.2) saturate(1.1);
         }
 
@@ -447,6 +447,50 @@
             color: #a78bfa;
         }
 
+        .tinder-buttons {
+            display: flex;
+            gap: 30px;
+            margin-top: 25px;
+            justify-content: center;
+        }
+
+        .swipe-btn {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 3px solid;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .swipe-btn:hover {
+            transform: scale(1.15);
+        }
+
+        .swipe-left {
+            border-color: #f87171;
+            color: #f87171;
+            box-shadow: 0 0 15px rgba(248,113,113,0.3);
+        }
+
+        .swipe-left:hover {
+            box-shadow: 0 0 25px rgba(248,113,113,0.5);
+        }
+
+        .swipe-right {
+            border-color: #34d399;
+            color: #34d399;
+            box-shadow: 0 0 15px rgba(52,211,153,0.3);
+        }
+
+        .swipe-right:hover {
+            box-shadow: 0 0 25px rgba(52,211,153,0.5);
+        }
+
         /* ===== НАВИГАЦИЯ ===== */
         .nav-hint {
             position: fixed;
@@ -472,21 +516,43 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes confetti {
-            0% { transform: translateY(-100vh) rotate(0deg); }
-            100% { transform: translateY(100vh) rotate(720deg); }
+        @keyframes ribbonFall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg)
+                    scaleX(1);
+                opacity: 1;
+            }
+            25% { transform: translateY(0) rotate(180deg)
+                scaleX(-1); }
+            50% { transform: translateY(30vh) rotate(360deg)
+                scaleX(1); }
+            75% { transform: translateY(60vh) rotate(540deg)
+                scaleX(-1); }
+            100% {
+                transform: translateY(110vh) rotate(720deg)
+                    scaleX(1);
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes ribbonSway {
+            0%, 100% { margin-left: 0; }
+            25% { margin-left: 15px; }
+            75% { margin-left: -15px; }
         }
 
         .slide.active > * {
             animation: fadeIn 0.5s ease forwards;
         }
 
-        .confetti-piece {
+        .ribbon-piece {
             position: fixed;
-            width: 10px;
-            height: 10px;
-            top: -10px;
-            animation: confetti 3s linear forwards;
+            width: 8px;
+            height: 35px;
+            top: -40px;
+            border-radius: 4px;
+            animation: ribbonFall 4s ease-in forwards,
+                ribbonSway 1.5s ease-in-out infinite;
             z-index: 998;
         }
     </style>
@@ -497,12 +563,12 @@
     <!-- ============ ТИТУЛЬНЫЙ СЛАЙД ============ -->
     <div class="slide main-title-slide active">
         <div class="photo-collage">
-            <img src="photos/girls_boat.png">
-            <img src="photos/girls_champagne_crop.png">
-            <img src="photos/cropped_3.png">
-            <img src="photos/cropped_4.png">
-            <img src="photos/cropped_5.png">
-            <img src="photos/cropped_6.png">
+            <img src="photos/title_1.png">
+            <img src="photos/title_2.png">
+            <img src="photos/title_3_crop.png">
+            <img src="photos/title_4_crop.png">
+            <img src="photos/title_5_crop.png">
+            <img src="photos/title_6_crop.png">
         </div>
         <div class="title-overlay"></div>
 
@@ -710,6 +776,10 @@
                 <div class="tinder-field"><strong>Ищу:</strong> Ту, которая составит мне расписание на жизнь</div>
             </div>
         </div>
+        <div class="tinder-buttons">
+            <div class="swipe-btn swipe-left">✕</div>
+            <div class="swipe-btn swipe-right">♥</div>
+        </div>
     </div>
 
     <div class="slide tinder-slide">
@@ -726,6 +796,10 @@
                 <div class="tinder-field"><strong>Минус:</strong> Мама всегда на первом месте</div>
                 <div class="tinder-field"><strong>Ищу:</strong> Ту, за которую не стыдно перед родом</div>
             </div>
+        </div>
+        <div class="tinder-buttons">
+            <div class="swipe-btn swipe-left">✕</div>
+            <div class="swipe-btn swipe-right">♥</div>
         </div>
     </div>
 
@@ -744,6 +818,10 @@
                 <div class="tinder-field"><strong>Ищу:</strong> Музу. На одну ночь. Максимум три.</div>
             </div>
         </div>
+        <div class="tinder-buttons">
+            <div class="swipe-btn swipe-left">✕</div>
+            <div class="swipe-btn swipe-right">♥</div>
+        </div>
     </div>
 
     <div class="slide tinder-slide">
@@ -760,6 +838,10 @@
                 <div class="tinder-field"><strong>Минус:</strong> В постели тоже стабильный и надёжный (без сюрпризов)</div>
                 <div class="tinder-field"><strong>Ищу:</strong> Ту, которая не будет спрашивать "о чём ты думаешь"</div>
             </div>
+        </div>
+        <div class="tinder-buttons">
+            <div class="swipe-btn swipe-left">✕</div>
+            <div class="swipe-btn swipe-right">♥</div>
         </div>
     </div>
 
@@ -1031,29 +1113,38 @@
                 showSlide(n);
         }
 
-        function createConfetti() {
+        function createRibbons() {
             const colors = [
                 '#f8b4d9','#a78bfa','#fbbf24',
-                '#34d399','#f87171','#60a5fa'
+                '#34d399','#f87171','#60a5fa',
+                '#fcd34d','#c084fc','#fb7185'
             ];
-            for (let i = 0; i < 60; i++) {
-                const p = document.createElement('div');
-                p.className = 'confetti-piece';
-                p.style.left = Math.random() * 100 + 'vw';
-                p.style.backgroundColor =
-                    colors[Math.floor(Math.random()*colors.length)];
-                p.style.animationDelay = Math.random()*2 + 's';
-                p.style.borderRadius =
-                    Math.random() > 0.5 ? '50%' : '0';
-                document.body.appendChild(p);
-                setTimeout(() => p.remove(), 5000);
+            for (let i = 0; i < 50; i++) {
+                const r = document.createElement('div');
+                r.className = 'ribbon-piece';
+                r.style.left = Math.random() * 100 + 'vw';
+                r.style.backgroundColor =
+                    colors[Math.floor(
+                        Math.random() * colors.length
+                    )];
+                r.style.animationDelay =
+                    Math.random() * 2.5 + 's';
+                r.style.height =
+                    (20 + Math.random() * 30) + 'px';
+                r.style.width =
+                    (5 + Math.random() * 6) + 'px';
+                const rot = Math.random() * 40 - 20;
+                r.style.transform =
+                    `rotate(${rot}deg)`;
+                document.body.appendChild(r);
+                setTimeout(() => r.remove(), 6500);
             }
         }
 
         const obs = new MutationObserver(() => {
             const a = document.querySelector('.slide.active');
             if (a && a.classList.contains('result-slide'))
-                createConfetti();
+                createRibbons();
         });
         slides.forEach(s => obs.observe(s, {
             attributes: true, attributeFilter: ['class']
