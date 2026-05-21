@@ -123,19 +123,51 @@
             60% { transform: rotate(0deg) translateX(0); }
         }
 
-        .balloon {
+        .sparkle {
             position: absolute;
-            width: 40px;
-            height: 50px;
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: float 6s ease-in-out infinite;
             z-index: 2;
+            pointer-events: none;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(5deg); }
-            50% { transform: translateY(-30px) rotate(-5deg); }
+        .sparkle::before, .sparkle::after {
+            content: '✦';
+            position: absolute;
+            font-size: inherit;
+            color: inherit;
+            animation: twinkle 2s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        .sparkle::after {
+            content: '✧';
+            animation-delay: 1s;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @keyframes sparkleFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-12px)
+                    rotate(10deg);
+            }
+        }
+
+        .sparkle-star {
+            position: absolute;
+            z-index: 2;
+            pointer-events: none;
+            opacity: 0;
+            animation:
+                twinkle var(--dur, 3s) ease-in-out
+                infinite var(--delay, 0s),
+                sparkleFloat var(--dur, 3s)
+                ease-in-out infinite var(--delay, 0s);
         }
 
         .photo-collage {
@@ -650,30 +682,36 @@
         </div>
         <div class="title-overlay"></div>
 
-        <div class="balloon" style="top:8%;left:3%;
-            background:#f8b4d9;width:55px;height:65px;
-            animation-delay:0s;"></div>
-        <div class="balloon" style="top:15%;right:6%;
-            background:#a78bfa;width:50px;height:60px;
-            animation-delay:1s;"></div>
-        <div class="balloon" style="top:55%;left:8%;
-            background:#fbbf24;width:60px;height:70px;
-            animation-delay:2s;"></div>
-        <div class="balloon" style="top:65%;right:10%;
-            background:#f8b4d9;width:45px;height:55px;
-            animation-delay:0.5s;"></div>
-        <div class="balloon" style="top:35%;left:88%;
-            background:#34d399;width:52px;height:62px;
-            animation-delay:1.5s;"></div>
-        <div class="balloon" style="top:82%;left:45%;
-            background:#c4a0e8;width:48px;height:58px;
-            animation-delay:3s;"></div>
-        <div class="balloon" style="top:12%;left:35%;
-            background:#fb7185;width:42px;height:52px;
-            animation-delay:2.5s;"></div>
-        <div class="balloon" style="top:45%;right:20%;
-            background:#fbbf24;width:50px;height:60px;
-            animation-delay:1.8s;"></div>
+        <span class="sparkle-star" style="top:6%;left:5%;
+            font-size:1.8rem;color:#f8b4d9;
+            --dur:2.5s;--delay:0s;">✦</span>
+        <span class="sparkle-star" style="top:12%;right:8%;
+            font-size:1.2rem;color:#a78bfa;
+            --dur:3s;--delay:0.5s;">✧</span>
+        <span class="sparkle-star" style="top:50%;left:6%;
+            font-size:2rem;color:#fbbf24;
+            --dur:2.8s;--delay:1s;">✦</span>
+        <span class="sparkle-star" style="top:70%;right:10%;
+            font-size:1.5rem;color:#f8b4d9;
+            --dur:3.2s;--delay:0.3s;">✧</span>
+        <span class="sparkle-star" style="top:30%;left:88%;
+            font-size:1.3rem;color:#34d399;
+            --dur:2.6s;--delay:1.5s;">✦</span>
+        <span class="sparkle-star" style="top:85%;left:40%;
+            font-size:1.6rem;color:#c4a0e8;
+            --dur:3.5s;--delay:2s;">✧</span>
+        <span class="sparkle-star" style="top:15%;left:35%;
+            font-size:1rem;color:#fb7185;
+            --dur:2.2s;--delay:0.8s;">✦</span>
+        <span class="sparkle-star" style="top:40%;right:15%;
+            font-size:1.4rem;color:#fbbf24;
+            --dur:2.9s;--delay:1.2s;">✧</span>
+        <span class="sparkle-star" style="top:60%;left:25%;
+            font-size:1.1rem;color:#a78bfa;
+            --dur:3.3s;--delay:1.8s;">✦</span>
+        <span class="sparkle-star" style="top:25%;left:60%;
+            font-size:1.7rem;color:#f8b4d9;
+            --dur:2.7s;--delay:0.6s;">✧</span>
 
         <div class="cheers-animation">
             <span class="glass-left">🥂</span>
@@ -1154,11 +1192,30 @@
         </div>
         <div class="title-overlay"></div>
 
-        <div class="balloon" style="top:8%;left:5%;background:#f8b4d9;width:55px;height:65px;animation-delay:0s;"></div>
-        <div class="balloon" style="top:18%;right:7%;background:#a78bfa;width:50px;height:60px;animation-delay:1s;"></div>
-        <div class="balloon" style="top:55%;left:8%;background:#fbbf24;width:60px;height:70px;animation-delay:2s;"></div>
-        <div class="balloon" style="top:70%;right:12%;background:#f8b4d9;width:45px;height:55px;animation-delay:0.5s;"></div>
-        <div class="balloon" style="top:40%;left:90%;background:#34d399;width:48px;height:58px;animation-delay:1.5s;"></div>
+        <span class="sparkle-star" style="top:8%;left:5%;
+            font-size:1.6rem;color:#f8b4d9;
+            --dur:2.5s;--delay:0s;">✦</span>
+        <span class="sparkle-star" style="top:18%;right:7%;
+            font-size:1.3rem;color:#a78bfa;
+            --dur:3s;--delay:0.7s;">✧</span>
+        <span class="sparkle-star" style="top:55%;left:8%;
+            font-size:2rem;color:#fbbf24;
+            --dur:2.8s;--delay:1.2s;">✦</span>
+        <span class="sparkle-star" style="top:70%;right:12%;
+            font-size:1.5rem;color:#f8b4d9;
+            --dur:3.2s;--delay:0.4s;">✧</span>
+        <span class="sparkle-star" style="top:40%;left:90%;
+            font-size:1.2rem;color:#34d399;
+            --dur:2.6s;--delay:1.5s;">✦</span>
+        <span class="sparkle-star" style="top:25%;left:50%;
+            font-size:1.8rem;color:#fbbf24;
+            --dur:3.4s;--delay:0.9s;">✧</span>
+        <span class="sparkle-star" style="top:80%;right:25%;
+            font-size:1.1rem;color:#fb7185;
+            --dur:2.3s;--delay:2s;">✦</span>
+        <span class="sparkle-star" style="top:35%;left:20%;
+            font-size:1.4rem;color:#c4a0e8;
+            --dur:3.1s;--delay:1.8s;">✧</span>
 
         <div class="cheers-animation">
             <span class="glass-left">🥂</span>
