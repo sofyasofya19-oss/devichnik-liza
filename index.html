@@ -347,49 +347,23 @@
         }
 
         /* ===== HOT OR NOT ===== */
-        .hot-slide {
+        .hot-screenshot-slide {
             background: linear-gradient(
-                135deg, #2e0a1a, #691b45, #44318d
+                135deg, #1a0a2e, #6b21a8, #44318d
             );
-        }
-
-        .hot-slide .photo-placeholder {
-            width: 350px;
-            height: 400px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            border: 3px dashed rgba(248, 180, 217, 0.4);
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            font-size: 1.5rem;
-            color: #7c6fa0;
-            margin-bottom: 30px;
+            justify-content: center;
+            padding: 30px;
         }
 
-        .hot-buttons {
-            display: flex;
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        .hot-btn {
-            font-size: 2rem;
-            padding: 15px 40px;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .hot-btn.yes {
-            background: linear-gradient(135deg, #34d399, #10b981);
-            color: #fff;
-        }
-
-        .hot-btn.no {
-            background: linear-gradient(135deg, #f87171, #ef4444);
-            color: #fff;
+        .hot-screen {
+            max-height: 70vh;
+            max-width: 90%;
+            object-fit: contain;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
         }
 
         /* ===== TINDER ===== */
@@ -1098,37 +1072,16 @@
         <div class="block-number">P.S.</div>
         <h1>Hot or Not</h1>
         <div class="description">
-            Бонус-раунд! Если осталось время
-            и хочется ещё —<br>
-            оцениваем анкеты реальных мужчин
-            из приложений знакомств.<br><br>
-            Свайп вправо или свайп влево? 🔥
+            Бонус-раунд! Лиза, последний шанс
+            оценить, от чего ты отказываешься.
+            Реальные анкеты, реальный ужас.
+            Свайпаем! 🔥
         </div>
     </div>
 
     <!-- Анкета 1: Эльдар -->
-    <div class="slide tinder-slide">
-        <div class="tinder-card">
-            <div class="tinder-photo">
-                <img src="photos/hot_1.png"
-                    alt="Эльдар">
-            </div>
-            <div class="tinder-info">
-                <h2>Эльдар, 29</h2>
-                <p class="tinder-location">
-                    📍 Санкт-Петербург</p>
-                <p class="tinder-bio">
-                    Буду лоялен к твоим вредным
-                    привычкам и чёрному юмору.
-                    Не понимаю потребительское
-                    отношение к людям.
-                    Не путешествую, т.к. получаю
-                    эмоции и смыслы не из
-                    материальной мишуры.
-                    Инста-моделей обхожу стороной.
-                </p>
-            </div>
-        </div>
+    <div class="slide hot-screenshot-slide">
+        <img src="photos/hot_1.png" class="hot-screen">
         <div class="tinder-buttons">
             <div class="swipe-btn swipe-left">✕</div>
             <div class="swipe-btn swipe-right">♥</div>
@@ -1136,28 +1089,8 @@
     </div>
 
     <!-- Анкета 2: Богдан -->
-    <div class="slide tinder-slide">
-        <div class="tinder-card">
-            <div class="tinder-photo">
-                <img src="photos/hot_2.png"
-                    alt="Богдан">
-            </div>
-            <div class="tinder-info">
-                <h2>Богдан, 24</h2>
-                <p class="tinder-location">
-                    📍 Санкт-Петербург</p>
-                <p class="tinder-bio">
-                    Приехал с юга 2 года назад чтобы
-                    зарабатывать. Работаю айтишником.
-                    Несколько высших образований.
-                    Владею 2 языками. Я технарь до
-                    мозга костей. Играл на гитаре,
-                    писал стихи, картины, музыку.
-                    Ищу взрослую, самостоятельную
-                    девушку. Рост 197 см.
-                </p>
-            </div>
-        </div>
+    <div class="slide hot-screenshot-slide">
+        <img src="photos/hot_2.png" class="hot-screen">
         <div class="tinder-buttons">
             <div class="swipe-btn swipe-left">✕</div>
             <div class="swipe-btn swipe-right">♥</div>
@@ -1165,28 +1098,8 @@
     </div>
 
     <!-- Анкета 3: Jason -->
-    <div class="slide tinder-slide">
-        <div class="tinder-card">
-            <div class="tinder-photo">
-                <img src="photos/hot_3.png"
-                    alt="Jason">
-            </div>
-            <div class="tinder-info">
-                <h2>Jason</h2>
-                <p class="tinder-bio">
-                    Отдаю предпочтение девушкам,
-                    у которых было большое количество
-                    сексуальных партнеров, желательно
-                    от 30–40 и больше. Если ты пока
-                    в начале этого пути, то можно
-                    и меньше)<br><br>
-                    Это не пранк и не фетиш. Я считаю
-                    это наиболее адекватным образом
-                    жизни для современной
-                    привлекательной девушки.
-                </p>
-            </div>
-        </div>
+    <div class="slide hot-screenshot-slide">
+        <img src="photos/hot_3.png" class="hot-screen">
         <div class="tinder-buttons">
             <div class="swipe-btn swipe-left">✕</div>
             <div class="swipe-btn swipe-right">♥</div>
@@ -1194,22 +1107,8 @@
     </div>
 
     <!-- Анкета 4: Дмитрий 45 -->
-    <div class="slide tinder-slide">
-        <div class="tinder-card">
-            <div class="tinder-photo">
-                <img src="photos/hot_4.png"
-                    alt="Дмитрий">
-            </div>
-            <div class="tinder-info">
-                <h2>Дмитрий, 45</h2>
-                <p class="tinder-location">
-                    📍 38 км от вас</p>
-                <p class="tinder-bio">
-                    *фото на кладбище*<br>
-                    Без комментариев.
-                </p>
-            </div>
-        </div>
+    <div class="slide hot-screenshot-slide">
+        <img src="photos/hot_4.png" class="hot-screen">
         <div class="tinder-buttons">
             <div class="swipe-btn swipe-left">✕</div>
             <div class="swipe-btn swipe-right">♥</div>
@@ -1217,25 +1116,8 @@
     </div>
 
     <!-- Анкета 5: Dmitriy 25 -->
-    <div class="slide tinder-slide">
-        <div class="tinder-card">
-            <div class="tinder-photo">
-                <img src="photos/hot_5.png"
-                    alt="Dmitriy">
-            </div>
-            <div class="tinder-info">
-                <h2>Dmitriy, 25</h2>
-                <p class="tinder-location">
-                    📍 32 км от вас</p>
-                <p class="tinder-bio">
-                    Саморазвитие, бег, рефлексии,
-                    гештальт-терапия, креатив, мода,
-                    дизайн.<br><br>
-                    *главное фото — справка
-                    об анализах* 📋
-                </p>
-            </div>
-        </div>
+    <div class="slide hot-screenshot-slide">
+        <img src="photos/hot_5.png" class="hot-screen">
         <div class="tinder-buttons">
             <div class="swipe-btn swipe-left">✕</div>
             <div class="swipe-btn swipe-right">♥</div>
@@ -1243,28 +1125,8 @@
     </div>
 
     <!-- Анкета 6: Прохор Олегович -->
-    <div class="slide tinder-slide">
-        <div class="tinder-card">
-            <div class="tinder-photo">
-                <img src="photos/hot_6.png"
-                    alt="Прохор Олегович">
-            </div>
-            <div class="tinder-info">
-                <h2>Прохор Олегович, 34</h2>
-                <p class="tinder-location">
-                    📍 Томск, 11 км от вас</p>
-                <p class="tinder-bio">
-                    Инженер в третьем поколении.
-                    Старомоден. Увлекаюсь тайгой
-                    и природой, камерными концертами,
-                    умным кино и китайской
-                    каллиграфией. Люблю историю,
-                    верую в единого господа бога.
-                    Юмор есть, дети и жёны
-                    отсутствуют. 190 см.
-                </p>
-            </div>
-        </div>
+    <div class="slide hot-screenshot-slide">
+        <img src="photos/hot_6.png" class="hot-screen">
         <div class="tinder-buttons">
             <div class="swipe-btn swipe-left">✕</div>
             <div class="swipe-btn swipe-right">♥</div>
@@ -1272,22 +1134,8 @@
     </div>
 
     <!-- Анкета 7: Парень в костюме -->
-    <div class="slide tinder-slide">
-        <div class="tinder-card">
-            <div class="tinder-photo">
-                <img src="photos/hot_7.png"
-                    alt="Аноним">
-            </div>
-            <div class="tinder-info">
-                <h2>???, ???</h2>
-                <p class="tinder-bio">
-                    «Ради просмотра знакомых,
-                    сидящих на сайте.<br>
-                    Не более того.<br><br>
-                    Не писать.»
-                </p>
-            </div>
-        </div>
+    <div class="slide hot-screenshot-slide">
+        <img src="photos/hot_7.png" class="hot-screen">
         <div class="tinder-buttons">
             <div class="swipe-btn swipe-left">✕</div>
             <div class="swipe-btn swipe-right">♥</div>
@@ -1295,28 +1143,8 @@
     </div>
 
     <!-- Анкета 8: Макс -->
-    <div class="slide tinder-slide">
-        <div class="tinder-card">
-            <div class="tinder-photo">
-                <img src="photos/hot_8.png"
-                    alt="Макс">
-            </div>
-            <div class="tinder-info">
-                <h2>Макс, 39</h2>
-                <p class="tinder-location">
-                    📍 Санкт-Петербург</p>
-                <p class="tinder-bio">
-                    Ищу девушку, подругу. Не ищу
-                    отношений. Ничего серьезного.
-                    Без вмешательства в личную жизнь
-                    и выноса мозга. Несвободен.
-                    Уважение личных границ, юмор,
-                    самоирония. P.s. Можно и
-                    поговорить 🤗<br><br>
-                    Открытые отношения.
-                </p>
-            </div>
-        </div>
+    <div class="slide hot-screenshot-slide">
+        <img src="photos/hot_8.png" class="hot-screen">
         <div class="tinder-buttons">
             <div class="swipe-btn swipe-left">✕</div>
             <div class="swipe-btn swipe-right">♥</div>
@@ -1324,34 +1152,8 @@
     </div>
 
     <!-- Анкета 9: Стас -->
-    <div class="slide tinder-slide">
-        <div class="tinder-card">
-            <div class="tinder-photo">
-                <img src="photos/hot_9.png"
-                    alt="Стас">
-            </div>
-            <div class="tinder-info">
-                <h2>Stas, 33</h2>
-                <p class="tinder-location">
-                    📍 8 км от вас</p>
-                <p class="tinder-bio">
-                    atmospheric, без слов, быть,
-                    завтра, заманчиво, искренность,
-                    копаться в себе, космос,
-                    критиковать, лениться, логика,
-                    не курить, не напрягаться,
-                    невидимое, недосказанность,
-                    нецензурщина, нравиться,
-                    общаться на Вы, повторение ошибок,
-                    подавлять слабости, подсознание,
-                    провокация, противоречивость,
-                    психология, путешествия, смысл,
-                    созерцание, солнце, спать сколько
-                    хочешь, стремление к
-                    самосовершенствованию
-                </p>
-            </div>
-        </div>
+    <div class="slide hot-screenshot-slide">
+        <img src="photos/hot_9.png" class="hot-screen">
         <div class="tinder-buttons">
             <div class="swipe-btn swipe-left">✕</div>
             <div class="swipe-btn swipe-right">♥</div>
